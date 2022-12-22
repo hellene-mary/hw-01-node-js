@@ -22,7 +22,7 @@ async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
       console.log("Action list, calling a function listContacts")
-      const list = await listContacts()
+      const list = await getContacts()
       console.table(list)
       break
 
@@ -34,7 +34,9 @@ async function invokeAction({ action, id, name, email, phone }) {
 
     case "add":
       console.log("Action add, calling a function addContact")
-      addContact(name, email, phone)
+
+      const newContact = await addContact(name, email, phone)
+      console.log("newContact", newContact)
       break
 
     case "remove":
