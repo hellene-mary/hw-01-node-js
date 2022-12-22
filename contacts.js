@@ -13,8 +13,8 @@ const contactsPath = path.resolve(__dirname, "./db/contacts.json")
 async function listContacts() {
   const data = await fs.readFile(contactsPath, { encoding: "utf8" })
   const contactsList = JSON.parse(data)
-  // console.log("contactsList", contactsList)
-  return contactsList
+  console.table(contactsList)
+  // return contactsList
 }
 // listContacts()
 
