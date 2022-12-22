@@ -26,7 +26,7 @@ async function getContactById(contactId) {
   // console.log("contactById", contactById)
   return contactById
 }
-// ? чому рядок а не число
+
 // getContactById("2")
 
 async function removeContact(contactId) {
@@ -38,7 +38,6 @@ async function removeContact(contactId) {
   await fs.writeFile(contactsPath, JSON.stringify(updatedContactList))
 }
 
-// ? чому рядок а не число
 // removeContact("R8urq4GsKxDzRtBFtpMl4")
 
 async function addContact(name, email, phone) {
