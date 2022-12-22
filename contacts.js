@@ -1,15 +1,10 @@
 const { nanoid } = require("nanoid")
-// Зроби імпорт модулів fs і path для роботи з файловою системою
+
 const fs = require("fs/promises")
 const path = require("node:path")
 
-// Створи змінну contactsPath і запиши в неї шлях до файлу contacts.json. Для складання шляху використовуй методи модуля path.
-
 const contactsPath = path.resolve(__dirname, "./db/contacts.json")
 
-// Додай функції для роботи з колекцією контактів. У функціях використовуй модуль fs та його методи readFile() і writeFile()
-
-// TODO: задокументувати кожну функцію
 async function listContacts() {
   const data = await fs.readFile(contactsPath, { encoding: "utf8" })
   const contactsList = JSON.parse(data)
@@ -44,5 +39,4 @@ async function addContact(name, email, phone) {
   await fs.writeFile(contactsPath, JSON.stringify(newContactsList))
 }
 
-// Зроби експорт створених функцій через module.exports
 module.exports = { listContacts, getContactById, removeContact, addContact }
