@@ -13,32 +13,24 @@ const contactsPath = path.resolve(__dirname, "./db/contacts.json")
 async function listContacts() {
   const data = await fs.readFile(contactsPath, { encoding: "utf8" })
   const contactsList = JSON.parse(data)
-  console.table(contactsList)
-  // return contactsList
+  return contactsList
 }
-// listContacts()
 
 async function getContactById(contactId) {
   const contactsList = await listContacts()
   const index = contactsList.findIndex((contact) => contact.id === contactId)
 
   const contactById = contactsList[index]
-  // console.log("contactById", contactById)
   return contactById
 }
-
-// getContactById("2")
 
 async function removeContact(contactId) {
   const contactsList = await listContacts()
   const updatedContactList = contactsList.filter(
     (contact) => contact.id !== contactId
   )
-  // console.log("updatedContactList", updatedContactList)
   await fs.writeFile(contactsPath, JSON.stringify(updatedContactList))
 }
-
-// removeContact("R8urq4GsKxDzRtBFtpMl4")
 
 async function addContact(name, email, phone) {
   const newContact = {
@@ -47,19 +39,10 @@ async function addContact(name, email, phone) {
     email: email,
     phone: phone,
   }
-  // console.log("newContact", newContact)
-
   const contactsList = await listContacts()
-  // console.log("contactsList", contactsList)
-
   const newContactsList = [...contactsList, newContact]
-  console.log("newContactsList", newContactsList)
-  // const newContactsList = data + JSON.stringify(newContact)
-  // console.log("newContactsList", newContactsList)
   await fs.writeFile(contactsPath, JSON.stringify(newContactsList))
 }
-
-// addContact("Ann2a", "email2", "154r3789")
 
 // Зроби експорт створених функцій через module.exports
 module.exports = { listContacts, getContactById, removeContact, addContact }

@@ -6,11 +6,6 @@ const {
   addContact,
 } = require("./contacts")
 
-// listContacts()
-// getContactById("2")
-// addContact("Ann2a", "email2", "154r3789")
-// removeContact("ngmoKSmTGLw_f1Y1TRzuN")
-
 const program = new Command()
 program
   .option("-a, --action <type>", "choose action")
@@ -24,32 +19,28 @@ program.parse(process.argv)
 const argv = program.opts()
 
 // TODO: рефакторить
-function invokeAction({ action, id, name, email, phone }) {
+async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
-      // ...
       console.log("Action list, calling a function listContacts")
-      listContacts()
+      const list = await listContacts()
+      console.table(list)
       break
 
     case "get":
-      // ... id
-      console.log("id", id)
       console.log("Action get, calling a function getContactById")
-      // getContactById(id)
+      const contact = await getContactById(id)
+      console.log(contact)
       break
 
     case "add":
-      // ... name email phone
       console.log("Action add, calling a function addContact")
-      // addContact(name, email, phone)
+      addContact(name, email, phone)
       break
 
     case "remove":
-      // ... id
-      console.log("id", id)
       console.log("Action remove, calling a function removeContact")
-      // removeContact(id)
+      removeContact(id)
       break
 
     default:
